@@ -1,0 +1,15 @@
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.AssemblyInfo.cs
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.sourcelink.json
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\bin\Debug\net8.0\ChapinWarriors_Proyect01.exe
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\bin\Debug\net8.0\ChapinWarriors_Proyect01.deps.json
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\bin\Debug\net8.0\ChapinWarriors_Proyect01.runtimeconfig.json
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\bin\Debug\net8.0\ChapinWarriors_Proyect01.dll
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\bin\Debug\net8.0\ChapinWarriors_Proyect01.pdb
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.dll
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\refint\ChapinWarriors_Proyect01.dll
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.pdb
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ChapinWarriors_Proyect01.genruntimeconfig.cache
+C:\Users\Admin\Desktop\IPC-2\REPOS\IPC2_Proy01_202602_202500066\ChapinWarriors_Proyect01\obj\Debug\net8.0\ref\ChapinWarriors_Proyect01.dll
