@@ -5,20 +5,20 @@
             <!-- Ciudad -->
             <name rows="15" columns="20"> 1001 </name>
             <row number="1" >********************</row>
-            <row number="2" >***-**-------------*</row>
-            <row number="3" >***-*****E*****C****</row>
-            <row number="4" >***-*****-*****-***R</row>
-            <row number="5" >E-------------------</row>
-            <row number="6" >***-**-**-**-**-****</row>
-            <row number="7" >***-**-**-**-**-**R*</row>
-            <row number="8" >*------------------*</row>
-            <row number="9" >***-**-**-**-**-****</row>
-            <row number="10">***-**-**-**-**-****</row>
-            <row number="11">***----------------*</row>
-            <row number="12">***-**-**-**-**-****</row>
-            <row number="13">***-**--E-**-*R-****</row>
-            <row number="14">***-*****---------C*</row>
-            <row number="15">***-*****C*****-****</row>
+            <row number="2" >*** **             *</row>
+            <row number="3" >*** *****E*****C****</row>
+            <row number="4" >*** ***** ***** ***R</row>
+            <row number="5" >E                   </row>
+            <row number="6" >*** ** ** ** ** ****</row>
+            <row number="7" >*** ** ** ** ** **R*</row>
+            <row number="8" >*                  *</row>
+            <row number="9" >*** ** ** ** ** ****</row>
+            <row number="10">*** ** ** ** ** ****</row>
+            <row number="11">***                *</row>
+            <row number="12">*** ** ** ** ** ****</row>
+            <row number="13">*** **  E ** *R ****</row>
+            <row number="14">*** *****         C*</row>
+            <row number="15">*** *****C***** ****</row>
             <!-- Unidades militares -->
             <militaryU row="5" column="14"> 50 </militaryU>
             <militaryU row="5" column="19"> 75 </militaryU>
@@ -31,16 +31,16 @@
         <city>
             <!-- ciudad -->
             <name rows="8" columns="10"> 1002 </name>
-            <row number="1" >*-----*C-*</row>
-            <row number="2" >*-*R*--*-*</row>
-            <row number="3" >*--*E*-*-*</row>
-            <row number="4" >*-*------*</row>
-            <row number="5" >*---**-***</row>
-            <row number="6" >*-**-----*</row>
-            <row number="7" >*--*-*-*-*</row>
-            <row number="8" >**C*-E-*R*</row>
+            <row number="1" >*     *C *</row>
+            <row number="2" >* *R*  * *</row>
+            <row number="3" >*  *E* * *</row>
+            <row number="4" >* *      *</row>
+            <row number="5" >*   ** ***</row>
+            <row number="6" >* **     *</row>
+            <row number="7" >*  * * * *</row>
+            <row number="8" >**C* E *R*</row>
             <!-- Unidades militares -->
-            <militaryU row="1" column="1"> 100 </militaryU>
+            <militaryU row="1" column="2"> 100 </militaryU>
             <militaryU row="1" column="4"> 25 </militaryU>
             <militaryU row="1" column="5"> 75 </militaryU>
             <militaryU row="2" column="9"> 500 </militaryU>

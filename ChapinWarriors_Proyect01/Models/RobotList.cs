@@ -44,11 +44,11 @@ namespace ChapinWarriors.Models
             while (current != null)
             {
                 if ( current.Data is Rescue r){
-                    Console.WriteLine($"Chapin Rescue | Nombre: {r.getName()}");
+                    Console.WriteLine($"Chapin Rescue  | Nombre: {r.getName()}");
                 } else if ( current.Data is Fighter f){
                     Console.WriteLine($"Chapin Fighter | Nombre: {f.getName()} - Capacidad Actual: {f.getCapacity()}");
                 } else if ( current.Data is ElChimatron c){
-                    Console.WriteLine($"El Chimatrón | Nombre: {c.getName()} - Capacidad Actual: {c.getCapacity()}");
+                    Console.WriteLine($"3lCh1m4tr0nASI | Nombre: {c.getName()} - Capacidad Actual: {c.getCapacity()}");
                 }
 
                 current = current.Next;

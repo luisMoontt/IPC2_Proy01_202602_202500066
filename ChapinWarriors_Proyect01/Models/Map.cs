@@ -13,7 +13,7 @@ namespace ChapinWarriors.Models
         public MapNode? Left { get; set; }
         public MapNode? Right { get; set; }
 
-        public MapNode(int type=0, string symbol=".")
+        public MapNode(int type=0, string symbol=" ")
         {
             this.type = type;
             this.symbol = symbol;
@@ -50,7 +50,7 @@ namespace ChapinWarriors.Models
 
             for (int r=0; r<rows; r++)
             {
-                for (int c=0; c<rows; c++)
+                for (int c=0; c<columns; c++)
                 {
                     grid[r, c] = new MapNode();
                 }
@@ -58,7 +58,7 @@ namespace ChapinWarriors.Models
 
             for (int r=0; r<rows; r++)
             {
-                for (int c=0; c<rows; c++)
+                for (int c=0; c<columns; c++)
                 {
                     if (r > 0) grid[r, c].Up = grid[r-1, c];
                     if (r < rows-1) grid[r, c].Down = grid[r+1, c];
@@ -104,8 +104,6 @@ namespace ChapinWarriors.Models
 
         public void ShowConsoleMap()
         {
-            Console.WriteLine($"\n--- TABLERO ORTOGONAL DE NODOS ({this.columns}x{this.rows}) ---");
-        
             MapNode? rowStart = Head;
 
             while (rowStart!=null)
@@ -113,7 +111,7 @@ namespace ChapinWarriors.Models
                 MapNode? current = rowStart;
                 while (current!=null)
                 {
-                    Console.Write($"[{current.getSymbol}:{current.getNodeType}]".PadRight(18));
+                    Console.Write($"{current.getSymbol()}".PadRight(2));
                     current = current.Right;
                 }
 

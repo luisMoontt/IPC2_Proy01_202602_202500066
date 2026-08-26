@@ -9,6 +9,9 @@ class Program
         DataProcess process = new DataProcess();
 
         RobotList<Robot> r_list = process.LoadRobotsXml();
+        CitiesList c_list = process.LoadCitiesXml();
+
         r_list.ShowRobotList();
+        c_list.ShowCityList();
     }
 }
