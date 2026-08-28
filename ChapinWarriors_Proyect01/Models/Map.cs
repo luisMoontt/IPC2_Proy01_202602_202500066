@@ -87,6 +87,76 @@ namespace ChapinWarriors.Models
             return current;
         }
 
+        public int countSymbol(string s)
+        {
+            int count = 0;
+            MapNode? currentRow = Head;
+
+            while (currentRow != null)
+            {
+                MapNode? currentColumn = currentRow;
+                while (currentColumn != null)
+                {
+                    if (currentColumn.getSymbol() == s && currentColumn.getState())
+                    {
+                        count++;
+                    }
+                    currentColumn = currentColumn.Right;
+                }
+                currentRow = currentRow.Down;
+            }
+
+            return count;
+        }
+
+        public MapNode? findSymbol(string s)
+        {
+            MapNode? currentRow = Head;
+
+            while (currentRow != null)
+            {
+                MapNode? currentColumn = currentRow;
+                while (currentColumn != null)
+                {
+                    if (currentColumn.getSymbol() == s && currentColumn.getState())
+                    {
+                        return currentColumn;
+                    }
+                    currentColumn = currentColumn.Right;
+                }
+                currentRow = currentRow.Down;
+            }
+
+            return null;
+        }
+
+        public int[] GetNodeCoordinates(MapNode node)
+        {
+            MapNode? currentRow = Head;
+            int r = 0;
+
+            while (currentRow != null)
+            {
+                MapNode? currentColumn = currentRow;
+                int c = 0;
+
+                while (currentColumn != null)
+                {
+                    if (currentColumn == node)
+                    {
+                        return new int[] { r+1, c+1 };
+                    }
+                    currentColumn = currentColumn.Right;
+                    c++;
+                }
+
+                currentRow = currentRow.Down;
+                r++;
+            }
+
+            return new int[] { 0, 0 };
+        }
+
         public bool AddValue(int row, int column, int type, string symbol)
         {
             MapNode? target = GetMapNode(row, column);

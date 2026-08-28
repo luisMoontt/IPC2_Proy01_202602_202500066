@@ -65,11 +65,26 @@ namespace ChapinWarriors.Services
                         {
                             string charSymbol = lineContent[colIndex].ToString();
                             
-                            map.AddValue(xmlRowIndex, colIndex, 0, charSymbol);
+                            switch(charSymbol)
+                            {
+                                case "*":
+                                    map.AddValue(xmlRowIndex, colIndex, 1, charSymbol);
+                                    break;
+                                case "E":
+                                    map.AddValue(xmlRowIndex, colIndex, 2, charSymbol);
+                                    break;
+                                case "C":
+                                    map.AddValue(xmlRowIndex, colIndex, 3, charSymbol);
+                                    break;
+                                case "R":
+                                    map.AddValue(xmlRowIndex, colIndex, 4, charSymbol);
+                                    break;
+                                default:
+                                    map.AddValue(xmlRowIndex, colIndex, 0, charSymbol);
+                                    break;
+                            }
                         }
                     }
-                    newCity.setMap(map);
-
 
                     MilitaryList m_list = new MilitaryList();
                     var militaryElements = c_element.Elements("militaryU");
@@ -81,8 +96,13 @@ namespace ChapinWarriors.Services
                         int m_col = int.Parse(mElem.Attribute("column")!.Value);
 
                         Military unit = new Military(m_capacity, m_row, m_col);
+
+                        map.AddValue(m_row-1, m_col-1, 5, "M");
+
                         m_list.AddMilitary(unit);
                     }
+                    
+                    newCity.setMap(map);
                     newCity.setMList(m_list);
 
                     c_list.AddCity(newCity);

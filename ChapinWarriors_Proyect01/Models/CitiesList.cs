@@ -51,6 +51,56 @@ namespace ChapinWarriors.Models
             current.setNext(newCN);
         }
 
+        public void cityNames(){
+            CityNode? current = head;
+
+            while (current != null)
+            {
+                City c = current.getData();
+                Console.WriteLine($"Ciudad: {c.getName()} | Dimensiones: {c.getC_Rows()}x{c.getC_Columns()}");
+                current = current.getNext();
+            }
+        }
+
+        public bool cityExists(string c_name){
+            CityNode? current = head;
+            bool find = false;
+
+            while (current != null)
+            {
+                City c = current.getData();
+                if (c.getName() == c_name)
+                {
+                    find = true;
+                    break;
+                }
+
+                current = current.getNext();
+            }
+
+            return find;
+        }
+
+        public City getCity(string c_name)
+        {
+            CityNode? current = head;
+            City? f_City =  null;
+
+            while (current != null)
+            {
+                City c = current.getData();
+
+                if (c.getName() == c_name)
+                {
+                    f_City = c;
+                    break;
+                }
+                current = current.getNext();
+            }
+
+            return f_City;
+        }
+
         public void ShowCityList()
         {
             CityNode? current = head;

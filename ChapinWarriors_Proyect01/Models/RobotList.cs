@@ -37,6 +37,51 @@ namespace ChapinWarriors.Models
             current.Next = newRN;
         }
 
+        public Fighter getFighter(string r_name)
+        {
+           RobotNode<T>? current = Head;
+           Fighter? r_fighter = null;
+
+
+            while (current != null)
+            {
+                if(current.Data is Fighter f)
+                {
+                    if(f.getName()==r_name)
+                    {
+                        r_fighter = f;
+                        break;
+                    }
+                }
+                current = current.Next;
+            }
+            return r_fighter;   
+        }
+
+        public void listFighters(){
+            RobotNode<T>? current = Head;
+
+            while (current != null)
+            {
+                if ( current.Data is Fighter f){
+                    Console.WriteLine($"Chapin Fighter | Nombre: {f.getName()} - Capacidad Actual: {f.getCapacity()}");
+                } 
+                current = current.Next;
+            }
+        }
+
+        public void listRescues(){
+            RobotNode<T>? current = Head;
+
+             while (current != null)
+            {
+                if ( current.Data is Rescue r){
+                    Console.WriteLine($"Chapin Rescue  | Nombre: {r.getName()}");
+                } 
+                current = current.Next;
+            }
+        }
+
         public void ShowRobotList()
         {
             RobotNode<T>? current = Head;
