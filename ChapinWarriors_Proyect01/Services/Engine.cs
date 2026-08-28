@@ -1,5 +1,5 @@
 using System;
-
+using ChapinWarriors.UI;
 using ChapinWarriors.Models;
 
 namespace ChapinWarriors.Services
@@ -135,7 +135,7 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
                 loop4 =false;
-                findExtractPath(startNode, finalNode2);
+                findExtractPath(startNode, finalNode, missionRobot);
             }
         }
         public void rescueMision(){
@@ -233,8 +233,10 @@ namespace ChapinWarriors.Services
                     
                 } else
                 {
+                    Console.WriteLine("UNICAS");
                     finalNode = cityMap.findSymbol("C");
                     C_cordinates = cityMap.GetNodeCoordinates(finalNode);
+                    pause();
                 }
 
                 Console.Clear();
@@ -251,7 +253,7 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
                 loop4 =false;
-                findExtractPath(startNode, finalNode2);
+                findRescuePath(startNode, finalNode, missionRobot);
             }
         }
 
@@ -412,23 +414,343 @@ namespace ChapinWarriors.Services
 
         }
         // BUSCAR CAMINO //////////////////////////////
-        public void findExtractPath(MapNode startNode, MapNode finalNode, int missionType){
-            MapMatrix pathMap = cityMap;
-            bool concidence = false;
+        public void findExtractPath(MapNode startNode, MapNode finalNode, Fighter missionRobot)
+        {
+            MapMatrix missionMap = ClonarMapa(cityMap, misionCity.getC_Rows(), misionCity.getC_Columns());
 
-            startC = cityMap.GetNodeCoordinates(startNode);
-            finalC = cityMap.GetNodeCoordinates(finalNode);
+            int[] startC = cityMap.GetNodeCoordinates(startNode);
+            int[] finalC = cityMap.GetNodeCoordinates(finalNode);
 
-            
+            int startRow = startC[0] - 1, startCol = startC[1] - 1;
+            int finalRow = finalC[0] - 1, finalCol = finalC[1] - 1;
 
+            DragPath startPath = new DragPath(startRow, startCol);
+            DragPath finalPath = new DragPath(finalRow, finalCol);
 
+            PathNode[] hojasInicio = new PathNode[] { startPath.getRoot()! };
+            PathNode[] hojasFinal = new PathNode[] { finalPath.getRoot()! };
 
-            DragPath StartPath = DragPath()
+            missionMap.GetMapNode(startRow, startCol)!.setState(false);
+            missionMap.GetMapNode(finalRow, finalCol)!.setState(false);
 
-            while(!concidence){
+            bool coincidencia = false;
+            PathNode? nodoInicio = null;
+            PathNode? nodoFinal = null;
 
+            while (!coincidencia)
+            {
+                hojasInicio = ExpandirHojas(hojasInicio, startPath, missionMap, false, hojasFinal, out PathNode? propioA, out PathNode? contrarioA);
+                if (contrarioA != null)
+                {
+                    nodoInicio = propioA;
+                    nodoFinal = contrarioA;
+                    coincidencia = true;
+                    break;
+                }
+
+                hojasFinal = ExpandirHojas(hojasFinal, finalPath, missionMap, false, hojasInicio, out PathNode? propioB, out PathNode? contrarioB);
+                if (contrarioB != null)
+                {
+                    nodoInicio = contrarioB;
+                    nodoFinal = propioB;
+                    coincidencia = true;
+                    break;
+                }
+
+                if (!HayVivos(hojasInicio) && !HayVivos(hojasFinal))
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n>> MISION FALLIDA: no existe un camino posible hacia el objetivo <<");
+                    missionMap.ShowConsoleMap();
+
+                    MissionGraphExporter.ExportarMision(
+                        missionMap, misionCity.getC_Rows(), misionCity.getC_Columns(), misionCity.getName(),
+                        "Extracción", missionRobot.getName(), missionRobot.getType(), missionRobot.getCapacity(), false,
+                        finalC[0], finalC[1], "Recurso a extraer", new Military[0]);
+
+                    return;
+                }
             }
 
+            PathNode[] ruta = ConstruirRuta(nodoInicio!, nodoFinal!);
+
+            resolverCombateExtraccion(ruta, missionMap, missionRobot, finalC[0], finalC[1]);
+        }
+
+        public void findRescuePath(MapNode startNode, MapNode finalNode, Rescue missionRobot)
+        {
+            MapMatrix missionMap = ClonarMapa(cityMap, misionCity.getC_Rows(), misionCity.getC_Columns());
+
+            int[] startC = cityMap.GetNodeCoordinates(startNode);
+            int[] finalC = cityMap.GetNodeCoordinates(finalNode);
+
+            int startRow = startC[0] - 1, startCol = startC[1] - 1;
+            int finalRow = finalC[0] - 1, finalCol = finalC[1] - 1;
+
+            DragPath startPath = new DragPath(startRow, startCol);
+            DragPath finalPath = new DragPath(finalRow, finalCol);
+
+            PathNode[] hojasInicio = new PathNode[] { startPath.getRoot()! };
+            PathNode[] hojasFinal = new PathNode[] { finalPath.getRoot()! };
+
+            missionMap.GetMapNode(startRow, startCol)!.setState(false);
+            missionMap.GetMapNode(finalRow, finalCol)!.setState(false);
+
+            bool coincidencia = false;
+            PathNode? nodoInicio = null;
+            PathNode? nodoFinal = null;
+
+            while (!coincidencia)
+            {
+                hojasInicio = ExpandirHojas(hojasInicio, startPath, missionMap, true, hojasFinal, out PathNode? propioA, out PathNode? contrarioA);
+                if (contrarioA != null)
+                {
+                    nodoInicio = propioA;
+                    nodoFinal = contrarioA;
+                    coincidencia = true;
+                    break;
+                }
+
+                hojasFinal = ExpandirHojas(hojasFinal, finalPath, missionMap, true, hojasInicio, out PathNode? propioB, out PathNode? contrarioB);
+                if (contrarioB != null)
+                {
+                    nodoInicio = contrarioB;
+                    nodoFinal = propioB;
+                    coincidencia = true;
+                    break;
+                }
+
+                if (!HayVivos(hojasInicio) && !HayVivos(hojasFinal))
+                {
+                    Console.Clear();
+                    Console.WriteLine("\n>> MISION FALLIDA: no existe un camino posible hacia el objetivo <<");
+                    missionMap.ShowConsoleMap();
+
+                    MissionGraphExporter.ExportarMision(
+                        missionMap, misionCity.getC_Rows(), misionCity.getC_Columns(), misionCity.getName(),
+                        "Rescate", missionRobot.getName(), missionRobot.getType(), null, false,
+                        finalC[0], finalC[1], "Unidad civil a rescatar", new Military[0]);
+
+                    return;
+                }
+            }
+
+            PathNode[] ruta = ConstruirRuta(nodoInicio!, nodoFinal!);
+
+            foreach (PathNode paso in ruta)
+            {
+                missionMap.AddValue(paso.getP_row(), paso.getP_col(), 9, ".");
+            }
+
+            Console.Clear();
+            Console.WriteLine("\n>> MISION DE RESCATE EXITOSA <<");
+            missionMap.ShowConsoleMap();
+            Console.WriteLine($"\nRobot utilizado: {missionRobot.getName()}");
+
+            MissionGraphExporter.ExportarMision(
+                missionMap, misionCity.getC_Rows(), misionCity.getC_Columns(), misionCity.getName(),
+                "Rescate", missionRobot.getName(), missionRobot.getType(), null, true,
+                finalC[0], finalC[1], "Unidad civil rescatada", new Military[0]);
+        }
+        
+
+        private bool HayVivos(PathNode[] hojas)
+        {
+            foreach (PathNode h in hojas)
+            {
+                if (h.getState()) return true;
+            }
+            return false;
+        }
+
+        private PathNode? BuscarHojaViva(PathNode[] hojas, int row, int col)
+        {
+            foreach (PathNode h in hojas)
+            {
+                if (h.getState() && h.getP_row() == row && h.getP_col() == col)
+                {
+                    return h;
+                }
+            }
+            return null;
+        }
+
+        private PathNode[] ExpandirHojas(PathNode[] hojas, DragPath arbol, MapMatrix mapa, bool bloquearMilitares, PathNode[] hojasContrarias, out PathNode? propio, out PathNode? contrario)
+        {
+            string[] lados = { "u", "d", "l", "r" };
+            int[] dRow = { -1, 1, 0, 0 };
+            int[] dCol = { 0, 0, -1, 1 };
+
+            PathNode[] nuevasHojas = new PathNode[0];
+            propio = null;
+            contrario = null;
+
+            foreach (PathNode hoja in hojas)
+            {
+                if (!hoja.getState()) continue;
+
+                bool seExpandio = false;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int nRow = hoja.getP_row() + dRow[i];
+                    int nCol = hoja.getP_col() + dCol[i];
+
+                    MapNode? vecino = mapa.GetMapNode(nRow, nCol);
+                    if (vecino == null) continue;
+
+                    bool esPared = vecino.getNodeType() == 1;
+                    bool esMilitarBloqueado = bloquearMilitares && vecino.getNodeType() == 5;
+                    if (esPared || esMilitarBloqueado) continue;
+
+                    if (vecino.getState())
+                    {
+                        PathNode nuevo = arbol.addStep(hoja, nRow, nCol, lados[i])!;
+                        vecino.setState(false);
+
+                        Array.Resize(ref nuevasHojas, nuevasHojas.Length + 1);
+                        nuevasHojas[nuevasHojas.Length - 1] = nuevo;
+                        seExpandio = true;
+                    }
+                    else if (contrario == null)
+                    {
+                        PathNode? match = BuscarHojaViva(hojasContrarias, nRow, nCol);
+                        if (match != null)
+                        {
+                            contrario = match;
+                            propio = hoja;
+                        }
+                    }
+                }
+
+                if (!seExpandio) hoja.setState(false);
+            }
+
+            return nuevasHojas;
+        }
+
+        private PathNode[] ConstruirRuta(PathNode nodoInicio, PathNode nodoFinal)
+        {
+            int nIni = 0;
+            PathNode? actual = nodoInicio;
+            while (actual != null) { nIni++; actual = actual.getParent(); }
+
+            int nFin = 0;
+            actual = nodoFinal;
+            while (actual != null) { nFin++; actual = actual.getParent(); }
+
+            PathNode[] ruta = new PathNode[nIni + nFin];
+
+            actual = nodoInicio;
+            for (int i = nIni - 1; i >= 0; i--)
+            {
+                ruta[i] = actual!;
+                actual = actual!.getParent();
+            }
+
+            actual = nodoFinal;
+            for (int i = 0; i < nFin; i++)
+            {
+                ruta[nIni + i] = actual!;
+                actual = actual!.getParent();
+            }
+
+            return ruta;
+        }
+
+        private Military? BuscarMilitarEnPosicion(int row, int col)
+        {
+            MilitaryNode? current = cityMilitaries.getHead();
+
+            while (current != null)
+            {
+                Military m = current.getData();
+                if (m.getM_Row() - 1 == row && m.getM_Column() - 1 == col)
+                {
+                    return m;
+                }
+                current = current.getNext();
+            }
+
+            return null;
+        }
+
+        private MapMatrix ClonarMapa(MapMatrix original, int rows, int columns)
+        {
+            MapMatrix copia = new MapMatrix(rows, columns);
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < columns; c++)
+                {
+                    MapNode? nodoOriginal = original.GetMapNode(r, c);
+                    MapNode? nodoCopia = copia.GetMapNode(r, c);
+
+                    if (nodoOriginal != null && nodoCopia != null)
+                    {
+                        nodoCopia.setNodeType(nodoOriginal.getNodeType());
+                        nodoCopia.setSymbol(nodoOriginal.getSymbol());
+                        nodoCopia.setState(nodoOriginal.getState());
+                    }
+                }
+            }
+
+            return copia;
+        }
+
+        private void resolverCombateExtraccion(PathNode[] ruta, MapMatrix missionMap, Fighter missionRobot, int objetivoRow, int objetivoCol)
+        {
+            Military[] enfrentados = new Military[0];
+            bool robotVivo = true;
+            int marcarHasta = ruta.Length;
+
+            for (int i = 0; i < ruta.Length; i++)
+            {
+                PathNode paso = ruta[i];
+                Military? enemigo = BuscarMilitarEnPosicion(paso.getP_row(), paso.getP_col());
+
+                if (enemigo != null)
+                {
+                    int dano = Math.Min(missionRobot.getCapacity(), enemigo.getM_Capacity());
+                    missionRobot.setCapacity(missionRobot.getCapacity() - dano);
+                    enemigo.setM_Capacity(enemigo.getM_Capacity() - dano);
+
+                    Array.Resize(ref enfrentados, enfrentados.Length + 1);
+                    enfrentados[enfrentados.Length - 1] = enemigo;
+
+                    if (missionRobot.getCapacity() <= 0)
+                    {
+                        robotVivo = false;
+                        marcarHasta = i + 1;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < marcarHasta; i++)
+            {
+                missionMap.AddValue(ruta[i].getP_row(), ruta[i].getP_col(), 9, ".");
+            }
+
+            Console.Clear();
+            missionMap.ShowConsoleMap();
+
+            Console.WriteLine(robotVivo
+                ? "\n>> MISION DE EXTRACCION EXITOSA <<"
+                : "\n>> MISION FALLIDA: el robot fue destruido en combate <<");
+
+            Console.WriteLine($"\nRobot utilizado: {missionRobot.getName()} ({missionRobot.getType()}) | Vida restante: {Math.Max(missionRobot.getCapacity(), 0)}");
+
+            Console.WriteLine("\nUnidades militares enfrentadas:");
+            foreach (Military m in enfrentados)
+            {
+                Console.WriteLine($" - Posición ({m.getM_Row()},{m.getM_Column()}) | Capacidad restante: {Math.Max(m.getM_Capacity(), 0)}");
+            }
+
+            MissionGraphExporter.ExportarMision(
+                missionMap, misionCity.getC_Rows(), misionCity.getC_Columns(), misionCity.getName(),
+                "Extracción", missionRobot.getName(), missionRobot.getType(), Math.Max(missionRobot.getCapacity(), 0), robotVivo,
+                objetivoRow, objetivoCol, "Recurso extraído", enfrentados);
         }
 
         public void showRobots()

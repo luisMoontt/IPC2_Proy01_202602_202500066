@@ -30,17 +30,8 @@
         </city>
         <city>
             <!-- ciudad -->
-            <!-- <name rows="8" columns="10"> 1002 </name>
-            <row number="1" >*     *C *</row>
-            <row number="2" >* *R*  * *</row>
-            <row number="3" >*  *E* * *</row>
-            <row number="4" >* *      *</row>
-            <row number="5" >*   ** ***</row>
-            <row number="6" >* **     *</row>
-            <row number="7" >*  * * * *</row>
-            <row number="8" >**C* E *R*</row> -->
             <name rows="8" columns="10"> 1002 </name>
-            <row number="1" >*     *  *</row>
+            <row number="1" >*     *C *</row>
             <row number="2" >* *R*  * *</row>
             <row number="3" >*  *E* * *</row>
             <row number="4" >* *      *</row>
