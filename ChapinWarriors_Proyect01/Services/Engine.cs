@@ -21,7 +21,7 @@ namespace ChapinWarriors.Services
             r_list = process.LoadRobotsXml(); 
             c_list = process.LoadCitiesXml(); 
         }
-        // MISIONES ///////////////////////////
+        // MISIONES //////////////////////////////////
         public void extractMision(){
             Fighter? missionRobot;
             cityMap = misionCity.getMap();
@@ -134,6 +134,8 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"Seleccionado para despliegue en coordenadas en ({E_cordinates[0]},{E_cordinates[1]}) y extracción en ({R_cordinates[0]},{R_cordinates[1]})"); 
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
+                loop4 =false;
+                findExtractPath(startNode, finalNode2);
             }
         }
         public void rescueMision(){
@@ -248,10 +250,12 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"Seleccionado para despliegue en ({E_cordinates[1]},{E_cordinates[0]}) y rescate en ({C_cordinates[1]},{C_cordinates[0]})"); 
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
+                loop4 =false;
+                findExtractPath(startNode, finalNode2);
             }
         }
 
-        // MENUS ///////////////////////////
+        // MENUS //////////////////////////////////////
         public void misionMenu(){
             bool loop = true;
 
@@ -404,6 +408,25 @@ namespace ChapinWarriors.Services
                         pause();
                         break;
                 }
+            }
+
+        }
+        // BUSCAR CAMINO //////////////////////////////
+        public void findExtractPath(MapNode startNode, MapNode finalNode, int missionType){
+            MapMatrix pathMap = cityMap;
+            bool concidence = false;
+
+            startC = cityMap.GetNodeCoordinates(startNode);
+            finalC = cityMap.GetNodeCoordinates(finalNode);
+
+            
+
+
+
+            DragPath StartPath = DragPath()
+
+            while(!concidence){
+
             }
 
         }
