@@ -47,12 +47,12 @@ namespace ChapinWarriors.Services
                 cityMilitaries.ShowMilitaryList();
                 Console.WriteLine("\n<<LISTA DE ROBOTS DISPONIBLES PARA MISION DE EXTRACCIÓN>>");
                 r_list.listFighters();
-                Console.WriteLine("Introducir nombre del robot para realizar la extracción.");
+                Console.WriteLine("\nIntroducir nombre del robot para realizar la extracción.");
                 string? r_name = Console.ReadLine();
 
                 missionRobot = r_list.getFighter(r_name);
 
-                if(r_list.getFighter(r_name)==null){
+                if(missionRobot==null){
                     Console.WriteLine("El nombre no corresponde a ningún ChapinFighter");
                     break;
                 }
@@ -66,28 +66,29 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"Entradas de despliegue disponibles: {n_E} y Recursos disponilbes para extracción: {n_R}");
                 Console.WriteLine("\n-- UNIDADES MILITARES EN EL AREA --");
                 cityMilitaries.ShowMilitaryList();
-                Console.WriteLine($"\n<< {missionRobot.getType().ToUpper()} - {missionRobot.getName()} ({missionRobot.getCapacity()}) >> Seleccionado para extracción.");
+                Console.WriteLine($"\n<<{missionRobot.getType().ToUpper()} - {missionRobot.getName()} ({missionRobot.getCapacity()})>> Seleccionado para extracción.");
                 
                 if(n_E > 1)
                 {
                     do
                     {
                         Console.WriteLine("\nIntroducir coordenada en X de la entrada a seleccionar.");
-                        int r_sNode = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("Introducir coordenada en Y de la entrada a seleccionar.");
                         int c_sNode = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Introducir coordenada en Y de la entrada a seleccionar.");
+                        int r_sNode = int.Parse(Console.ReadLine()!);
+                        
 
-                        startNode = cityMap.GetMapNode(r_sNode, c_sNode);
+                        startNode = cityMap.GetMapNode(r_sNode-1, c_sNode-1);
+                        //Console.WriteLine(startNode.getSymbol);
 
-                        if(startNode==null)
+                        if(startNode==null || startNode.getSymbol()!="E")
                         {
-                            Console.WriteLine($"\nEntrada no encontrada en coordenadas ({r_sNode},{c_sNode}), volver a ingresar datos...");
-                            pause();
+                            Console.WriteLine($"\nEntrada no encontrada en coordenadas ({c_sNode},{r_sNode}), volver a ingresar datos...");
                         }
                         E_cordinates[0] = r_sNode;
                         E_cordinates[1] = c_sNode;
 
-                    } while (startNode == null);
+                    } while (startNode == null || startNode.getSymbol()!="E");
                     
                 } else
                 {
@@ -100,20 +101,19 @@ namespace ChapinWarriors.Services
                     do
                     {
                         Console.WriteLine("\nIntroducir coordenada en X del recurso a extraer.");
-                        int r_rNode = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("Introducir coordenada en Y del recurso a extraer.");
                         int c_rNode = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Introducir coordenada en Y del recurso a extraer.");
+                        int r_rNode = int.Parse(Console.ReadLine()!);
 
-                        finalNode = cityMap.GetMapNode(r_rNode, c_rNode);
-                        if(finalNode==null)
+                        finalNode = cityMap.GetMapNode(r_rNode-1, c_rNode-1);
+                        if(finalNode==null || finalNode.getSymbol()!="R")
                         {
-                            Console.WriteLine($"\nRecurso no encontrado en coordenadas ({r_rNode},{c_rNode}), volver a ingresar datos...");
-                            pause();
+                            Console.WriteLine($"\nRecurso no encontrado en coordenadas ({c_rNode},{r_rNode}), volver a ingresar datos...");
                         }
                         R_cordinates[0] = r_rNode;
                         R_cordinates[1] = c_rNode;
 
-                    } while (finalNode == null);
+                    } while (finalNode == null || finalNode.getSymbol()!="R");
                     
                 } else
                 {
@@ -130,14 +130,125 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"Entradas de despliegue disponibles: {n_E} y Recursos disponilbes para extracción: {n_R}");
                 Console.WriteLine("\n-- UNIDADES MILITARES EN EL AREA --");
                 cityMilitaries.ShowMilitaryList();
-                Console.WriteLine($"\n<< {missionRobot.getType().ToUpper()} - {missionRobot.getName()} ({missionRobot.getCapacity()}) >>");
+                Console.WriteLine($"\n<<{missionRobot.getType().ToUpper()} - {missionRobot.getName()} ({missionRobot.getCapacity()})>>");
                 Console.WriteLine($"Seleccionado para despliegue en coordenadas en ({E_cordinates[0]},{E_cordinates[1]}) y extracción en ({R_cordinates[0]},{R_cordinates[1]})"); 
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
             }
         }
-        public void extractionMision(){
-            
+        public void rescueMision(){
+            Rescue? missionRobot;
+            cityMap = misionCity.getMap();
+            cityMilitaries = misionCity.getMList();
+            MapNode? startNode; 
+            MapNode? finalNode;
+            int n_E = cityMap.countSymbol("E");
+            int n_C = cityMap.countSymbol("C");
+            int[] E_cordinates = new int[2];
+            int[] C_cordinates = new int[2];
+            bool loop4 = true;
+
+            while(loop4)
+            {
+                Console.Clear();
+                Console.WriteLine($"\n<< MAPA DE CIUDAD: {misionCity.getName()} >>");
+                Console.WriteLine(" ");
+                cityMap.ShowConsoleMap();
+                Console.WriteLine(" ");
+                Console.WriteLine($"Ciudad: {misionCity.getName()} | Dimensiones: {misionCity.getC_Rows()}x{misionCity.getC_Columns()}");
+                Console.WriteLine($"Entradas de despliegue disponibles: {n_E},  Unidades Civiles disponilbes para rescate: {n_C}.");
+                Console.WriteLine("\n-- UNIDADES MILITARES EN EL AREA --");
+                cityMilitaries.ShowMilitaryList();
+                Console.WriteLine("\n<<LISTA DE ROBOTS DISPONIBLES PARA MISION DE EXTRACCIÓN>>");
+                r_list.listRescues();
+                Console.WriteLine("\nIntroducir nombre del robot para realizar la extracción.");
+                string? r_name = Console.ReadLine();
+
+                missionRobot = r_list.getRescue(r_name);
+
+                if(missionRobot==null){
+                    Console.WriteLine("El nombre no corresponde a ningún ChapinRescue");
+                    break;
+                }
+
+                Console.Clear();
+                Console.WriteLine($"\n<< MAPA DE CIUDAD: {misionCity.getName()} >>");
+                Console.WriteLine(" ");
+                cityMap.ShowConsoleMap();
+                Console.WriteLine(" ");
+                Console.WriteLine($"Ciudad: {misionCity.getName()} | Dimensiones: {misionCity.getC_Rows()}x{misionCity.getC_Columns()}");
+                Console.WriteLine($"Entradas de despliegue disponibles: {n_E}, Unidades Civiles disponilbes para rescate: {n_C}.");
+                Console.WriteLine("\n-- UNIDADES MILITARES EN EL AREA --");
+                cityMilitaries.ShowMilitaryList();
+                Console.WriteLine($"\n<<{missionRobot.getType().ToUpper()} - {missionRobot.getName()}>> Seleccionado para rescate.");
+                
+                if(n_E > 1)
+                {
+                    do
+                    {
+                        Console.WriteLine("\nIntroducir coordenada en X de la entrada a seleccionar.");
+                        int c_sNode = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Introducir coordenada en Y de la entrada a seleccionar.");
+                        int r_sNode = int.Parse(Console.ReadLine()!);
+                        
+
+                        startNode = cityMap.GetMapNode(r_sNode-1, c_sNode-1);
+                        //Console.WriteLine(startNode.getSymbol);
+
+                        if(startNode==null || startNode.getSymbol()!="E")
+                        {
+                            Console.WriteLine($"\nEntrada no encontrada en coordenadas ({c_sNode},{r_sNode}), volver a ingresar datos...");
+                        }
+                        E_cordinates[0] = r_sNode;
+                        E_cordinates[1] = c_sNode;
+
+                    } while (startNode == null || startNode.getSymbol()!="E");
+                    
+                } else
+                {
+                    startNode = cityMap.findSymbol("E");
+                    E_cordinates = cityMap.GetNodeCoordinates(startNode);
+                }
+
+                if(n_C > 1)
+                {
+                    do
+                    {
+                        Console.WriteLine("\nIntroducir coordenada en X de la Unidad Civil a rescatar.");
+                        int c_cNode = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("Introducir coordenada en Y de la Unidad Civil a rescatar.");
+                        int r_cNode = int.Parse(Console.ReadLine()!);
+
+                        finalNode = cityMap.GetMapNode(r_cNode-1, c_cNode-1);
+                        if(finalNode==null || finalNode.getSymbol()!="C")
+                        {
+                            Console.WriteLine($"\nUnidad Civil no encontrado en coordenadas ({c_cNode},{r_cNode}), volver a ingresar datos...");
+                        }
+                        C_cordinates[0] = r_cNode;
+                        C_cordinates[1] = c_cNode;
+
+                    } while (finalNode == null || finalNode.getSymbol()!="C");
+                    
+                } else
+                {
+                    finalNode = cityMap.findSymbol("C");
+                    C_cordinates = cityMap.GetNodeCoordinates(finalNode);
+                }
+
+                Console.Clear();
+                Console.WriteLine($"\n<< MAPA DE CIUDAD: {misionCity.getName()} >>");
+                Console.WriteLine(" ");
+                cityMap.ShowConsoleMap();
+                Console.WriteLine(" ");
+                Console.WriteLine($"Ciudad: {misionCity.getName()} | Dimensiones: {misionCity.getC_Rows()}x{misionCity.getC_Columns()}");
+                Console.WriteLine($"Entradas de despliegue disponibles: {n_E}, Unidades Civiles disponilbes para rescate: {n_C}.");
+                Console.WriteLine("\n-- UNIDADES MILITARES EN EL AREA --");
+                cityMilitaries.ShowMilitaryList();
+                Console.WriteLine($"\n<<{missionRobot.getType().ToUpper()} - {missionRobot.getName()}>>");
+                Console.WriteLine($"Seleccionado para despliegue en ({E_cordinates[1]},{E_cordinates[0]}) y rescate en ({C_cordinates[1]},{C_cordinates[0]})"); 
+                Console.WriteLine($"\nConfirmar mision...");  
+                pause();
+            }
         }
 
         // MENUS ///////////////////////////
@@ -210,13 +321,11 @@ namespace ChapinWarriors.Services
                                     {
                                         case "1":
                                             Console.WriteLine("AQUI IRIA MISION DE RESCATE");
-                                            
-                                            pause();
+                                            rescueMision();
                                             break;                        
                                         case "2":
                                             Console.WriteLine("AQUI IRIA MISION DE EXTRACCION");
                                             extractMision();
-                                            pause();
                                             break;
                                         case "3":
                                             Console.Clear();

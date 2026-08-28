@@ -58,6 +58,26 @@ namespace ChapinWarriors.Models
             return r_fighter;   
         }
 
+        public Rescue getRescue(string r_name)
+        {
+           RobotNode<T>? current = Head;
+           Rescue? r_rescue = null;
+           
+            while (current != null)
+            {
+                if(current.Data is Rescue r)
+                {
+                    if(r.getName()==r_name)
+                    {
+                        r_rescue = r;
+                        break;
+                    }
+                }
+                current = current.Next;
+            }
+            return r_rescue;   
+        }
+
         public void listFighters(){
             RobotNode<T>? current = Head;
 

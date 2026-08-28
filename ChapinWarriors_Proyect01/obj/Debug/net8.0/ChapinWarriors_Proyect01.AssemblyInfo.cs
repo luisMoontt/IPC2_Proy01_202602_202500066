@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChapinWarriors_Proyect01")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+515f9630714531dd75fb91e57df3910ae516f183")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52345e41c36d173aadf095e71a3a37a3e7331c43")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChapinWarriors_Proyect01")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChapinWarriors_Proyect01")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
