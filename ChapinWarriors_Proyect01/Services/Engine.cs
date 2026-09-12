@@ -68,33 +68,33 @@ namespace ChapinWarriors.Services
                 cityMilitaries.ShowMilitaryList();
                 Console.WriteLine($"\n<<{missionRobot.getType().ToUpper()} - {missionRobot.getName()} ({missionRobot.getCapacity()})>> Seleccionado para extracción.");
                 
-                if(n_E > 1)
-                {
-                    do
-                    {
-                        Console.WriteLine("\nIntroducir coordenada en X de la entrada a seleccionar.");
-                        int c_sNode = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("Introducir coordenada en Y de la entrada a seleccionar.");
-                        int r_sNode = int.Parse(Console.ReadLine()!);
+                // if(n_E > 1)
+                // {
+                //     do
+                //     {
+                //         Console.WriteLine("\nIntroducir coordenada en X de la entrada a seleccionar.");
+                //         int c_sNode = int.Parse(Console.ReadLine()!);
+                //         Console.WriteLine("Introducir coordenada en Y de la entrada a seleccionar.");
+                //         int r_sNode = int.Parse(Console.ReadLine()!);
                         
 
-                        startNode = cityMap.GetMapNode(r_sNode-1, c_sNode-1);
-                        //Console.WriteLine(startNode.getSymbol);
+                //         startNode = cityMap.GetMapNode(r_sNode-1, c_sNode-1);
+                //         //Console.WriteLine(startNode.getSymbol);
 
-                        if(startNode==null || startNode.getSymbol()!="E")
-                        {
-                            Console.WriteLine($"\nEntrada no encontrada en coordenadas ({c_sNode},{r_sNode}), volver a ingresar datos...");
-                        }
-                        E_cordinates[0] = r_sNode;
-                        E_cordinates[1] = c_sNode;
+                //         if(startNode==null || startNode.getSymbol()!="E")
+                //         {
+                //             Console.WriteLine($"\nEntrada no encontrada en coordenadas ({c_sNode},{r_sNode}), volver a ingresar datos...");
+                //         }
+                //         E_cordinates[0] = r_sNode;
+                //         E_cordinates[1] = c_sNode;
 
-                    } while (startNode == null || startNode.getSymbol()!="E");
+                //     } while (startNode == null || startNode.getSymbol()!="E");
                     
-                } else
-                {
-                    startNode = cityMap.findSymbol("E");
-                    E_cordinates = cityMap.GetNodeCoordinates(startNode);
-                }
+                // } else
+                // {
+                //     startNode = cityMap.findSymbol("E");
+                //     E_cordinates = cityMap.GetNodeCoordinates(startNode);
+                // }
 
                 if(n_R > 1)
                 {
@@ -121,6 +121,9 @@ namespace ChapinWarriors.Services
                     R_cordinates = cityMap.GetNodeCoordinates(finalNode);
                 }
 
+                findshortRoad(R_cordinates[0], R_cordinates[1], cityMap);
+                pause();
+
                 Console.Clear();
                 Console.WriteLine($"\n<< MAPA DE CIUDAD: {misionCity.getName()} >>");
                 Console.WriteLine(" ");
@@ -135,7 +138,7 @@ namespace ChapinWarriors.Services
                 Console.WriteLine($"\nConfirmar mision...");  
                 pause();
                 loop4 =false;
-                findExtractPath(startNode, finalNode, missionRobot);
+                //findExtractPath(startNode, finalNode, missionRobot);
             }
         }
         public void rescueMision(){
@@ -552,7 +555,28 @@ namespace ChapinWarriors.Services
                 "Rescate", missionRobot.getName(), missionRobot.getType(), null, true,
                 finalC[0], finalC[1], "Unidad civil rescatada", new Military[0]);
         }
-        
+
+
+/////////////////////////////////////////////////////////////////////////
+        public void findshortRoad(int finalR, int finalC, MapMatrix cityMap)
+        {
+            int enters = cityMap.countSymbol("E");
+            Road[] roads = new Road[enters];
+            MapNode[] allEnters = cityMap.GetEntryNodes();
+
+            for (int i = 0; i < allEnters.Length; i++)
+            {
+                int[] coords = cityMap.GetNodeCoordinates(allEnters[i]);
+                int r = coords[0];
+                int c = coords[1];
+
+                Console.WriteLine($"Entrada {i + 1}: Fila = {r}, Columna = {c}");
+            }
+
+            pause();
+        }
+//////////////////////////////////////////////////////////////////////////
+
 
         private bool HayVivos(PathNode[] hojas)
         {

@@ -40,26 +40,26 @@ namespace ChapinWarriors.Services
                     return null;
                 }
 
-                var cityElements = doc.Descendants("city");
+                var cityElements = doc.Descendants("ciudad");
 
                 foreach( var c_element in cityElements)
                 {
-                    XElement? cityName = c_element.Element("name");
+                    XElement? cityName = c_element.Element("nombre");
                     if ( cityName == null) continue;
 
                     string c_name = cityName.Value.Trim();
-                    int rows = int.Parse(cityName.Attribute("rows")!.Value);
-                    int cols = int.Parse(cityName.Attribute("columns")!.Value);
+                    int rows = int.Parse(cityName.Attribute("filas")!.Value);
+                    int cols = int.Parse(cityName.Attribute("columnas")!.Value);
 
                     City newCity = new City(c_name, rows, cols);
                     MapMatrix map = new MapMatrix(rows, cols);
 
-                    var rowElements = c_element.Elements("row");
+                    var rowElements = c_element.Elements("fila");
 
                     foreach(var r_element in rowElements)
                     {
-                        int xmlRowIndex = int.Parse(r_element.Attribute("number")!.Value) - 1; 
-                        string lineContent = r_element.Value.Trim();
+                        int xmlRowIndex = int.Parse(r_element.Attribute("numero")!.Value) - 1; 
+                        string lineContent = r_element.Value;
 
                         for (int colIndex = 0; colIndex < lineContent.Length && colIndex < cols; colIndex++)
                         {
@@ -87,13 +87,13 @@ namespace ChapinWarriors.Services
                     }
 
                     MilitaryList m_list = new MilitaryList();
-                    var militaryElements = c_element.Elements("militaryU");
+                    var militaryElements = c_element.Elements("unidadMilitar");
 
                     foreach (var mElem in militaryElements)
                     {
                         int m_capacity = int.Parse(mElem.Value.Trim());
-                        int m_row = int.Parse(mElem.Attribute("row")!.Value);
-                        int m_col = int.Parse(mElem.Attribute("column")!.Value);
+                        int m_row = int.Parse(mElem.Attribute("fila")!.Value);
+                        int m_col = int.Parse(mElem.Attribute("columna")!.Value);
 
                         Military unit = new Military(m_capacity, m_row, m_col);
 
@@ -132,18 +132,18 @@ namespace ChapinWarriors.Services
 
                 foreach (var element in robotElemets)
                 {
-                    XElement? nameNode = element.Element("name");
+                    XElement? nameNode = element.Element("nombre");
                     if (nameNode != null)
                     {
                         string nameRobot = nameNode.Value.Trim();
-                        string typeRobot = nameNode.Attribute("type")?.Value ?? "Desconocido";
+                        string typeRobot = nameNode.Attribute("tipo")?.Value ?? "Desconocido";
 
-                        if(typeRobot == "Fighter")
+                        if(typeRobot == "ChapinFighter")
                         {
-                            int capacityRobot = int.Parse(nameNode.Attribute("capacity")!.Value);
+                            int capacityRobot = int.Parse(nameNode.Attribute("capacidad")!.Value);
                             r_list.Add(new Fighter(nameRobot, typeRobot, capacityRobot)); 
                         } 
-                        else if(typeRobot == "Rescue")
+                        else if(typeRobot == "ChapinRescue")
                         {
                             r_list.Add(new Rescue(nameRobot, typeRobot));
                         }

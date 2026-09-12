@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\IPC-2\\REPOS\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\ChapinWarriors_Proyect01.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Calificacion2\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\ChapinWarriors_Proyect01.csproj",
       "projectName": "ChapinWarriors_Proyect01",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\IPC-2\\REPOS\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\ChapinWarriors_Proyect01.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Calificacion2\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\ChapinWarriors_Proyect01.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\IPC-2\\REPOS\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Calificacion2\\IPC2_Proy01_202602_202500066\\ChapinWarriors_Proyect01\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.424/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.425/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

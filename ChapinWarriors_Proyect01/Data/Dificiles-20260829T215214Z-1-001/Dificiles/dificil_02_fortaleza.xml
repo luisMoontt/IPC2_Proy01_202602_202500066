@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuracion>
+    <listaCiudades>
+        <ciudad>
+            <nombre filas="15" columnas="25">CiudadFortaleza</nombre>
+            <fila numero="1">"*************************"</fila>
+            <fila numero="2">"*E                      *"</fila>
+            <fila numero="3">"* ********** ********** *"</fila>
+            <fila numero="4">"* ********** ********** *"</fila>
+            <fila numero="5">"* **                 ** *"</fila>
+            <fila numero="6">"* ** ******* ******* ** *"</fila>
+            <fila numero="7">"* ** *****     ***** ** *"</fila>
+            <fila numero="8">"*           R           *"</fila>
+            <fila numero="9">"* ** *****    C***** ** *"</fila>
+            <fila numero="10">"* ** ******* ******* ** *"</fila>
+            <fila numero="11">"* **                 ** *"</fila>
+            <fila numero="12">"* ********** ********** *"</fila>
+            <fila numero="13">"* ********** ********** *"</fila>
+            <fila numero="14">"* C                    E*"</fila>
+            <fila numero="15">"*************************"</fila>
+            <unidadMilitar fila="3" columna="13">35</unidadMilitar>
+            <unidadMilitar fila="6" columna="13">28</unidadMilitar>
+            <unidadMilitar fila="8" columna="4">15</unidadMilitar>
+            <unidadMilitar fila="8" columna="6">60</unidadMilitar>
+            <unidadMilitar fila="8" columna="20">75</unidadMilitar>
+            <unidadMilitar fila="8" columna="22">40</unidadMilitar>
+            <unidadMilitar fila="10" columna="13">22</unidadMilitar>
+            <unidadMilitar fila="12" columna="13">100</unidadMilitar>
+        </ciudad>
+    </listaCiudades>
+    <robots>
+        <robot>
+            <nombre tipo="ChapinRescue">robotRescue01</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="100">robotFighter01</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="37">robotFighter02</nombre>
+        </robot>
+    </robots>
+</configuracion>

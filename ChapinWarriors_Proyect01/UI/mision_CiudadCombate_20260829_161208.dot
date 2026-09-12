@@ -1,0 +1,12 @@
+digraph MissionMap {
+    graph [fontname="Helvetica"];
+    node [shape=plaintext, fontname="Helvetica"];
+    mapa [label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="12">
+            <TR><TD><FONT POINT-SIZE="18"><B>Ruta de extracción:</B></FONT></TD></TR>
+            <TR><TD><TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="8"><TR><TD></TD><TD><B>1</B></TD><TD><B>2</B></TD><TD><B>3</B></TD></TR><TR><TD><B>1</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR><TR><TD><B>2</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR><TR><TD><B>3</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR><TR><TD><B>4</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR><TR><TD><B>5</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR><TR><TD><B>6</B></TD><TD BGCOLOR="black"></TD><TD BGCOLOR="#F2D9A0"></TD><TD BGCOLOR="black"></TD></TR></TABLE></TD></TR>
+            <TR><TD><TABLE BORDER="0" CELLBORDER="0" CELLSPACING="4"><TR><TD BGCOLOR="black" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Intransitable</TD></TR><TR><TD BGCOLOR="#8FCB7C" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Punto de entrada</TD></TR><TR><TD BGCOLOR="#F2D9A0" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Camino</TD></TR><TR><TD BGCOLOR="#C0392B" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Unidad militar</TD></TR><TR><TD BGCOLOR="#4A90D9" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Unidad civil</TD></TR><TR><TD BGCOLOR="#A9A9A9" WIDTH="16" HEIGHT="16"></TD><TD ALIGN="LEFT">Recurso</TD></TR></TABLE></TD></TR>
+            <TR><TD ALIGN="LEFT">Tipo de misión: extracción<BR ALIGN="LEFT"/>Recurso extraído: 6,2<BR ALIGN="LEFT"/>Robot utilizado: Fighter1 (ChapinFighter)<BR ALIGN="LEFT"/>Vida restante: 30<BR ALIGN="LEFT"/>Resultado: MISION EXITOSA<BR ALIGN="LEFT"/></TD></TR>
+        </TABLE>
+    >];
+}

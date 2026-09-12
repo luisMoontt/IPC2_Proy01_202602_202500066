@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuracion>
+    <listaCiudades>
+        <ciudad>
+            <nombre filas="15" columnas="21">CiudadLaberinto</nombre>
+            <fila numero="1">"E      *       *    C"</fila>
+            <fila numero="2">"** *** * * *** * * * "</fila>
+            <fila numero="3">"   * *   *   * * * * "</fila>
+            <fila numero="4">" * * * *** * * * * * "</fila>
+            <fila numero="5">" *   *  R* * * * *   "</fila>
+            <fila numero="6">" ******* *** * * * **"</fila>
+            <fila numero="7">"E*           * *     "</fila>
+            <fila numero="8">" * * *** ***** ***** "</fila>
+            <fila numero="9">" *          C* *     "</fila>
+            <fila numero="10">" * * * ***** * * ****"</fila>
+            <fila numero="11">" *     *  R*   *     "</fila>
+            <fila numero="12">" *** *** * * * * *** "</fila>
+            <fila numero="13">"   * *         * *  C"</fila>
+            <fila numero="14">" *** * ******* *** * "</fila>
+            <fila numero="15">"R    *             *E"</fila>
+            <unidadMilitar fila="1" columna="2">25</unidadMilitar>
+            <unidadMilitar fila="1" columna="12">20</unidadMilitar>
+            <unidadMilitar fila="11" columna="10">55</unidadMilitar>
+            <unidadMilitar fila="12" columna="11">70</unidadMilitar>
+            <unidadMilitar fila="13" columna="15">30</unidadMilitar>
+            <unidadMilitar fila="14" columna="21">45</unidadMilitar>
+        </ciudad>
+    </listaCiudades>
+    <robots>
+        <robot>
+            <nombre tipo="ChapinRescue">robotRescue01</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinRescue">robotRescue02</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="100">robotFighter01</nombre>
+        </robot>
+    </robots>
+</configuracion>

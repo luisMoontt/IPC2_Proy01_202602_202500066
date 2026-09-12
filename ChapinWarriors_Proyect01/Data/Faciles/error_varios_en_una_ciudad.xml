@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuracion>
+  <listaCiudades>
+    <ciudad>
+      <nombre filas="6" columnas="7">CiudadVariosErrores</nombre>
+      <fila numero="1">"*******"</fila>
+      <fila numero="2">"*E    *"</fila>
+      <fila numero="3">"* *** *"</fila>
+      <fila numero="4">"* *** *"</fila>
+      <fila numero="5">"*C R  *"</fila>
+      <fila numero="6">"*******"</fila>
+      <!-- ERROR: militar sobre punto de entrada -->
+      <unidadMilitar fila="2" columna="2">20</unidadMilitar>
+      <!-- ERROR: militar sobre unidad civil -->
+      <unidadMilitar fila="5" columna="2">20</unidadMilitar>
+      <!-- ERROR: militar sobre recurso -->
+      <unidadMilitar fila="5" columna="4">20</unidadMilitar>
+      <!-- ERROR: militar sobre muro -->
+      <unidadMilitar fila="4" columna="4">20</unidadMilitar>
+    </ciudad>
+  </listaCiudades>
+  <robots>
+    <robot>
+      <nombre tipo="ChapinRescue">Rescate1</nombre>
+    </robot>
+    <robot>
+      <nombre tipo="ChapinFighter" capacidad="30">Fighter1</nombre>
+    </robot>
+  </robots>
+</configuracion>

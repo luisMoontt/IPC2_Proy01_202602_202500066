@@ -171,6 +171,32 @@ namespace ChapinWarriors.Models
             target.setSymbol(symbol);
             return true;
         }
+////////////////////////////////////////////////////////////////////////
+        public MapNode[] GetEntryNodes()
+        {
+            int entriesCount = countSymbol("E");
+
+            MapNode[] entryNodes = new MapNode[entriesCount];
+            int index = 0;
+
+            MapNode? currentRow = Head;
+
+            while (currentRow != null)
+            {
+                MapNode? currentColumn = currentRow;
+                while (currentColumn != null)
+                {
+                    if (currentColumn.getSymbol() == "E" && currentColumn.getState())
+                    {
+                        entryNodes[index] = currentColumn;
+                        index++;
+                    }
+                    currentColumn = currentColumn.Right;
+                }
+                currentRow = currentRow.Down;
+            }
+            return entryNodes;
+        }
 
         public void ShowConsoleMap()
         {
